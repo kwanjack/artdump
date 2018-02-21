@@ -7,7 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 class HomePage extends React.Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {loggedIn: false};
   }
 
 
