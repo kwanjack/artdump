@@ -7,8 +7,6 @@ import { CreatePost } from './CreatePostPage';
  
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-Posts = new Mongo.Collection("posts");
-
 // App component - represents the whole app
 export default class App extends Component {
   render() {
