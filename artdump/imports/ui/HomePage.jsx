@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Posts } from '../api/post';
 
 class HomePage extends React.Component {
   constructor() {
@@ -11,7 +12,19 @@ class HomePage extends React.Component {
   }
 
 
+  //list of mongo objects => list of html elements
+  renderPosts() {
+    let { posts } = this.props;
+
+    return posts.map((post, i) => {
+      return <div>
+        <a key={i} href={post.url}> {post.tags} </a>
+      </div>
+    })
+  }
+
   render() {
+    console.log(this.props.posts);
     return <div>
         <h1> This is the Home Page. <i className="fa fa-home"> </i> </h1>
         <div><Link to="/login"> To Login page </Link></div>
@@ -21,12 +34,19 @@ class HomePage extends React.Component {
         )}
         <div><Link to="/"> To main page </Link></div>
         <div><AccountsUIWrapper/></div>
+
+        <h2> Posts </h2>
+        <div>
+        { this.renderPosts() }
+        </div>
     </div>
   }
 }
 
+
 export default withTracker(() => {
   return {
-    currentUser: Meteor.user()
+    currentUser: Meteor.user(),
+    posts: Posts.find().fetch()
   };
 })(HomePage);
