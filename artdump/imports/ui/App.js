@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import HomePage from './HomePage';
 import { LoginPage }from './LoginPage';
 import { RegistrationPage } from './RegistrationPage';
-import { CreatePost } from './CreatePostPage';
+import CreatePost from './CreatePostPage';
  
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
