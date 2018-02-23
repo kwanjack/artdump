@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import { Posts } from '../api/post.jsx';
 
 export default class Post extends Component {
   render(){
     let author = this.props.post.authorUsername
-    //let author = Meteor.users.findOne(this.props.post.authorId).username;
+    let authorId = this.props.post.authorId
+    
     return <div>
         <div className="postTitle">
-          {author}:
+          <Link to={`/user/${authorId}`} params={{ authorUsername: "blah" }}>
+            {author}:{" "}
+          </Link>
           <a 
             key={this.props.i} 
             href={this.props.post.url}> 

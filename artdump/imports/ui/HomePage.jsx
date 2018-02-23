@@ -27,11 +27,11 @@ class HomePage extends React.Component {
   }
 
   render() {
-    //console.log(this.props.posts);
     return <div>
-        <h1> This is the Home Page. <i className="fa fa-home"> </i> </h1>
-        <div><Link to="/login"> To Login page </Link></div>
-        <div><Link to="/registration"> To Registration page </Link></div>
+        <h1> 
+          <i className="fa fa-home"> </i>
+          This is the Home Page. 
+          </h1>
         {(this.props.currentUser != null &&
           <div><Link to="/createpost"> To Create Post page</Link></div>
         )}
@@ -45,7 +45,6 @@ class HomePage extends React.Component {
     </div>
   }
 }
-
 
 export default withTracker(() => {
   return {

@@ -17,7 +17,7 @@ class CreatePost extends React.Component {
 
     var url = this.refs.post.value.trim()
     var tags = this.refs.tags.value.trim()
-    var author = Meteor.userId()
+    var author = this.props.currentUser._id
     //added username field to make it easier to display author name
     var authorUsername = this.props.currentUser.username
 
@@ -38,6 +38,7 @@ class CreatePost extends React.Component {
 
   render() {
     //redirect to home page
+    //console.log(this.props.currentUser)
     if (this.state.redirectToHome) {
       return (
         <Switch>
@@ -48,8 +49,6 @@ class CreatePost extends React.Component {
     
     return <div>
         <h1> This is the Create Post Page. </h1>
-        <Link to="/login"> To Login page </Link>
-        <Link to="/registration"> To registration page </Link>
         <Link to="/"> To main page </Link>
         <form className="new-post">
           <input
@@ -67,7 +66,8 @@ class CreatePost extends React.Component {
 }
 
 export default withTracker(() => {
+  let currentUser = Meteor.user() ? Meteor.user() : {};
   return {
-    currentUser: Meteor.user(),
+    currentUser,
   };
 })(CreatePost);
