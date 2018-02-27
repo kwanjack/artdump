@@ -5,6 +5,7 @@ import Post from './Post.jsx'
 import { Posts } from '../api/post';
 import HomePage from './HomePage';
 import { Link } from 'react-router-dom';
+import AccountsUIWrapper from './AccountsUIWrapper.js';
 
 class User extends React.Component{
   constructor() {
@@ -36,6 +37,7 @@ class User extends React.Component{
         <div>  
           <Link to="/"> To main page </Link>
           </div>
+        <div><AccountsUIWrapper/></div>
         <div className="user-page-username">
           {userIdName.toString()}'s Posts
           </div>
