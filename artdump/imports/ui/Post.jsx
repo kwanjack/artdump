@@ -1,31 +1,116 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Posts } from '../api/post.jsx';
+import { withTracker } from 'meteor/react-meteor-data';
+import Comment from './Comment.jsx';
+import { Comments } from '../api/comment.jsx';
+import './Post.css'
 
-export default class Post extends Component {
+class Post extends Component {
+  submitComment(post_index, event){
+    event.preventDefault();
+    let ref = 'commentContent'+post_index;
+    //console.log(this.refs[ref].value);
+    let text = this.refs[ref].value
+    let postId = this.props.post._id
+    Meteor.call('comment.insert', text, postId)
+    this.refs[ref].value = "";
+  }
+
+  renderPostComment(post_index){
+    return <div>
+      <div className="comment-textbox">
+        <form onSubmit={this.submitComment.bind(this, post_index)}>
+          <textarea 
+            rows="4" 
+            cols="50" 
+            ref={"commentContent"+post_index}/>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  renderComments(){
+    let { postComments } = this.props;
+
+    return postComments.map((comment, i) => {
+      return <div>
+        <Comment 
+          key={i} 
+          comment={comment}/>
+      </div>
+    });
+  }
+
+  likePost(){
+    Posts.update(
+      { _id: this.props.post._id},
+      { $push: { likes: this.props.currentUser._id } }
+    )
+  }
+
+  unlikePost(){
+    Posts.update(
+      { _id: this.props.post._id},
+      { $pull: { likes: this.props.currentUser._id } }
+    )
+  }
+
+  renderLike(){
+    let currentUserLiked = this.props.post.likes.includes(this.props.currentUser._id);
+    if(!currentUserLiked){
+      return <div className="likeButton">
+        <button onClick={this.likePost.bind(this)}>Like</button>
+      </div>
+    } else if(currentUserLiked){
+      return <div className="unlikeButton">
+        <button onClick={this.unlikePost.bind(this)}>Unlike</button>
+      </div>
+    }
+  }
+
   render(){
-    let author = this.props.post.authorUsername
-    let authorId = this.props.post.authorId
-    
+    //console.log(this.props.postComments);
+    let author = this.props.post.authorUsername;
+    let authorId = this.props.post.authorId;
     return <div>
         <div className="postTitle">
           <Link to={`/user/${authorId}`} params={{ authorUsername: "blah" }}>
-            {author}:{" "}
+            <strong>{author}</strong>:{" "}
           </Link>
-          <a 
-            key={this.props.i} 
-            href={this.props.post.url}> 
-            {this.props.post.tags} </a>
         </div>
         <div className="postPicture">
           <img src={this.props.post.url} />
         </div>
+        {(this.props.currentUser._id != null &&
+          this.renderLike()
+        )}
         <div className="postLikes">
-          {this.props.post.likes} likes
+          {this.props.post.likes.length} likes
         </div>
         <div className="postComments">
-          Comments: {this.props.post.comments}
+          Comments:
+          {this.renderComments()}
+        </div>
+        <div className="post-comment">
+          {(this.props.currentUser._id != null &&
+            this.renderPostComment(this.props.post._id)
+          )}
         </div>
     </div>
   }
 }
+
+export default withTracker(props => {
+  let postId = props.post._id;
+  let currentUser = Meteor.user() ? Meteor.user() : {};
+  let postComments = Comments.find({postId: postId}, { /*sort: { createAt: -1 } */}).fetch();
+
+  return {
+    currentUser,
+    postComments
+  };
+})(Post);

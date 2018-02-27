@@ -14,26 +14,25 @@ class CreatePost extends React.Component {
 
 	submitPost(event){
     event.preventDefault();
-
-    var url = this.refs.post.value.trim()
-    var tags = this.refs.tags.value.trim()
-    var author = this.props.currentUser._id
+    var url = this.url.value.trim();
+    var tags = this.tags.value.trim().split(" ");
+    var author = this.props.currentUser._id;
     //added username field to make it easier to display author name
-    var authorUsername = this.props.currentUser.username
+    var authorUsername = this.props.currentUser.username;
 
-    this.refs.post.value=""
-    this.refs.tags.value=""
+    this.url.value="";
+    this.tags.value="";
 
     Posts.insert({
       url: url,
       tags: tags,
       createAt: new Date(),
-      likes: 0,
+      likes: [],
       comments: [],
       authorId: author,
       authorUsername: authorUsername
     });
-    this.setState({ redirectToHome: true })
+    this.setState({ redirectToHome: true });
 	}
 
   render() {
@@ -50,17 +49,28 @@ class CreatePost extends React.Component {
     return <div>
         <h1> This is the Create Post Page. </h1>
         <Link to="/"> To main page </Link>
-        <form className="new-post">
-          <input
-            type="text"
-            ref="post"
+        <form onSubmit={this.submitPost.bind(this)}>
+          <div>
+            URL
+            </div>
+          <textarea 
+            rows="1" 
+            cols="50" 
+            ref={(input) => {this.url = input}}
             placeholder="url goes here"/><br/>
-          <input
-            type="text"
-            ref="tags"
-            placeholder="tags goes here"/><br/>
-          <button onClick={this.submitPost.bind(this)}>Submit</button>
+          <div>
+            Tags
+            </div>
+          <textarea 
+            rows="4" 
+            cols="50" 
+            ref={(input) => {this.tags = input}}
+            placeholder="tags goes here"/>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
         </form>
+
     </div>
   }
 }
