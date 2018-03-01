@@ -1,11 +1,12 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, Switch } from 'react-router-dom';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Posts } from '../api/post';
 
 import Post from './Post.jsx'
+import Search from './Search.jsx'
 
 class HomePage extends React.Component {
   constructor() {
@@ -13,14 +14,21 @@ class HomePage extends React.Component {
     this.state = {loggedIn: false};
   }
 
+  routeHome(){
+    return (
+      <Switch>
+        <Redirect to="/"/>
+      </Switch>
+    )
+  }
+
   //list of mongo objects => list of html elements
   renderPosts() {
     let { posts } = this.props;
 
     return posts.map((post, i) => {
-      return <div>
+      return <div key={i}>
         <Post 
-          key={i} 
           post={post}/>
       </div>
     });
@@ -28,10 +36,15 @@ class HomePage extends React.Component {
 
   render() {
     return <div>
-        <h1> 
-          <i className="fa fa-home"> </i>
+        <h1>
+          <div onClick={() => this.routeHome()}> 
+            <i className="fa fa-home"> </i>
+          </div>
           This is the Home Page. 
           </h1>
+        <div>
+          <Search/>
+          </div>
         {(this.props.currentUser != null &&
           <div><Link to="/createpost"> To Create Post page</Link></div>
         )}

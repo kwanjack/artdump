@@ -14,8 +14,6 @@ class Comment extends Component{
 }
 
 export default withTracker(props => {
-  let currentUser = Meteor.user() ? Meteor.user() : {};
   return {
-    currentUser
   };
 })(Comment);

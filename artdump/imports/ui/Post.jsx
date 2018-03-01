@@ -7,16 +7,17 @@ import { Comments } from '../api/comment.jsx';
 import './Post.css'
 
 class Post extends Component {
+  //Call Meteor method to insert comment in comments collection
   submitComment(post_index, event){
     event.preventDefault();
     let ref = 'commentContent'+post_index;
-    //console.log(this.refs[ref].value);
     let text = this.refs[ref].value
     let postId = this.props.post._id
     Meteor.call('comment.insert', text, postId)
     this.refs[ref].value = "";
   }
-
+  //Render the text box and button to post comments
+  //Need post_index to know which post comment box is on
   renderPostComment(post_index){
     return <div>
       <div className="comment-textbox">
@@ -32,14 +33,13 @@ class Post extends Component {
       </div>
     </div>
   }
-
+  //Render the list of comments of a post
   renderComments(){
     let { postComments } = this.props;
 
     return postComments.map((comment, i) => {
-      return <div>
-        <Comment 
-          key={i} 
+      return <div key={i}>
+        <Comment
           comment={comment}/>
       </div>
     });
@@ -61,9 +61,11 @@ class Post extends Component {
 
   renderLike(){
     let currentUserLiked = this.props.post.likes.includes(this.props.currentUser._id);
+    let postId = this.props.post._id;
+    let userId = this.props.currentUser._id
     if(!currentUserLiked){
       return <div className="likeButton">
-        <button onClick={this.likePost.bind(this)}>Like</button>
+        {<button onClick={this.likePost.bind(this)}>Like</button>}
       </div>
     } else if(currentUserLiked){
       return <div className="unlikeButton">
@@ -78,7 +80,7 @@ class Post extends Component {
     let authorId = this.props.post.authorId;
     return <div>
         <div className="postTitle">
-          <Link to={`/user/${authorId}`} params={{ authorUsername: "blah" }}>
+          <Link to={`/user/${authorId}`} >
             <strong>{author}</strong>:{" "}
           </Link>
         </div>
@@ -107,7 +109,7 @@ class Post extends Component {
 export default withTracker(props => {
   let postId = props.post._id;
   let currentUser = Meteor.user() ? Meteor.user() : {};
-  let postComments = Comments.find({postId: postId}, { /*sort: { createAt: -1 } */}).fetch();
+  let postComments = Comments.find({postId: postId}, { sort: { createAt: -1 } }).fetch();
 
   return {
     currentUser,
