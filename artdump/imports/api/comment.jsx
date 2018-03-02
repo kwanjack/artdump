@@ -12,5 +12,10 @@ Meteor.methods({
       authorId: this.userId,
       authorUsername: Meteor.users.findOne(this.userId).username,
     });
+  },
+  'comment.delete'(commentId) {
+    Comments.remove(
+      { _id: commentId}
+    );
   }
 });

@@ -74,6 +74,12 @@ class Post extends Component {
     }
   }
 
+  handleDeletePost(){
+    if(confirm("Delete post?")){
+      Meteor.call('post.delete', this.props.post._id);
+    }
+  }
+
   render(){
     //console.log(this.props.postComments);
     let author = this.props.post.authorUsername;
@@ -83,6 +89,11 @@ class Post extends Component {
           <Link to={`/user/${authorId}`} >
             <strong>{author}</strong>:{" "}
           </Link>
+          {(this.props.currentUser._id == this.props.post.authorId &&
+            <span className="delete-post-button">
+              <button onClick={this.handleDeletePost.bind(this)}>&times;</button>
+            </span>
+        )}
         </div>
         <div className="postPicture">
           <img src={this.props.post.url} />
