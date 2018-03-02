@@ -21,9 +21,8 @@ class User extends React.Component{
     let { posts } = this.props;
 
     return posts.map((post, i) => {
-      return <div>
+      return <div key={i}>
         <Post 
-          key={i} 
           post={post}/>
       </div>
     });
