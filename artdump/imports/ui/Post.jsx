@@ -4,7 +4,6 @@ import { Posts } from '../api/post.jsx';
 import { withTracker } from 'meteor/react-meteor-data';
 import Comment from './Comment.jsx';
 import { Comments } from '../api/comment.jsx';
-import './Post.css'
 
 class Post extends Component {
   //Call Meteor method to insert comment in comments collection
