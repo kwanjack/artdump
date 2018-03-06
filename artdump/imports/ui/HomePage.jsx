@@ -10,6 +10,7 @@ import { Button } from 'react-toolbox/lib/button';
 
 import Post from './Post.jsx'
 import Search from './Search.jsx'
+import Navbar from './Navbar.jsx'
 
 class HomePage extends React.Component {
   constructor() {
@@ -38,13 +39,9 @@ class HomePage extends React.Component {
   }
 
   render() {
-
-
     return <div className="wrapper">
       <div className="box header">
-      Header
-        <Button label="Hello World!" />,
-
+          <Navbar/>
       </div>
       <div className="box sidebar">Sidebar</div>
       <div className="box sidebar2">Sidebar 2</div>

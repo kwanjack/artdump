@@ -5,6 +5,7 @@ import { Posts } from '../api/post.jsx';
 import { Redirect, Switch } from 'react-router-dom'
 import { withTracker } from 'meteor/react-meteor-data';
 import HomePage from './HomePage';
+import Navbar from './Navbar.jsx'
 
 class CreatePost extends React.Component {
   constructor() {
@@ -37,7 +38,7 @@ class CreatePost extends React.Component {
 
   render() {
     //redirect to home page
-    //console.log(this.props.currentUser)
+    //console.log(this.props.match.path)
     if (this.state.redirectToHome) {
       return (
         <Switch>
@@ -47,6 +48,10 @@ class CreatePost extends React.Component {
     }
     
     return <div>
+        <div>
+          <Navbar
+            path={this.props.match.path}/>
+          </div>
         <h1> This is the Create Post Page. </h1>
         <Link to="/"> To main page </Link>
         <form onSubmit={this.submitPost.bind(this)}>
