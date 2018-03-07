@@ -17,12 +17,12 @@ class Post extends Component {
   }
   //Render the text box and button to post comments
   //Need post_index to know which post comment box is on
-  renderPostComment(post_index){
+  renderSubmitComment(post_index){
     return <div>
       <div className="comment-textbox">
         <form onSubmit={this.submitComment.bind(this, post_index)}>
           <textarea 
-            rows="4" 
+            rows="3" 
             cols="50" 
             ref={"commentContent"+post_index}/>
           <div>
@@ -83,34 +83,36 @@ class Post extends Component {
     //console.log(this.props.postComments);
     let author = this.props.post.authorUsername;
     let authorId = this.props.post.authorId;
-    return <div>
-        <div className="postTitle">
-          <Link to={`/user/${authorId}`} >
-            <strong>{author}</strong>:{" "}
-          </Link>
-          {(this.props.currentUser._id == this.props.post.authorId &&
+    return <div >
+        <div className="test-post-wrapper">
+          <div className="post-picture">
+            <img src={this.props.post.url} />
+          </div>
+          <div className="author">
+            <Link to={`/user/${authorId}`} >
+              <strong>{author}</strong>:{" "}
+            </Link>
+            {(this.props.currentUser._id == this.props.post.authorId &&
             <span className="delete-post-button">
               <button onClick={this.handleDeletePost.bind(this)}>&times;</button>
             </span>
-        )}
-        </div>
-        <div className="postPicture">
-          <img src={this.props.post.url} />
-        </div>
-        {(this.props.currentUser._id != null &&
-          this.renderLike()
-        )}
-        <div className="postLikes">
-          {this.props.post.likes.length} likes
-        </div>
-        <div className="postComments">
-          Comments:
-          {this.renderComments()}
-        </div>
-        <div className="post-comment">
-          {(this.props.currentUser._id != null &&
-            this.renderPostComment(this.props.post._id)
-          )}
+            )}
+          </div>
+          <div className="likes">
+            {(this.props.currentUser._id != null &&
+              this.renderLike()
+            )}
+            {this.props.post.likes.length} likes
+          </div>
+          <div className="comments">
+            Comments:
+            {this.renderComments()}
+          </div>
+          <div className="submit-comment">
+            {(this.props.currentUser._id != null &&
+              this.renderSubmitComment(this.props.post._id)
+            )}
+          </div>
         </div>
     </div>
   }

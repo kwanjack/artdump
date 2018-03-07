@@ -38,7 +38,6 @@ class CreatePost extends React.Component {
 
   render() {
     //redirect to home page
-    //console.log(this.props.match.path)
     if (this.state.redirectToHome) {
       return (
         <Switch>
@@ -46,14 +45,13 @@ class CreatePost extends React.Component {
         </Switch>
       )
     }
-    
+    //Pass in the path to not render the createpost in navbar
     return <div>
         <div>
           <Navbar
             path={this.props.match.path}/>
-          </div>
+        </div>
         <h1> This is the Create Post Page. </h1>
-        <Link to="/"> To main page </Link>
         <form onSubmit={this.submitPost.bind(this)}>
           <div>
             URL
