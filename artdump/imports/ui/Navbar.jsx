@@ -10,7 +10,7 @@ class Navbar extends Component{
   render (){
     return <div className="nav-bar-wrapper">
       <div className="navbar-title-container">
-        <Link className="title-logo" to="/">Artdump</Link>
+        <Link className="title-logo" to="/">ARTDUMP</Link>
       </div>
       <div className="search-bar-container">
         <Search/>

@@ -93,9 +93,9 @@ class Post extends Component {
               <strong>{author}</strong>:{" "}
             </Link>
             {(this.props.currentUser._id == this.props.post.authorId &&
-            <span className="delete-post-button">
-              <button onClick={this.handleDeletePost.bind(this)}>&times;</button>
-            </span>
+              <div className="delete-post-button">
+                <button onClick={this.handleDeletePost.bind(this)}>&times;</button>
+              </div>
             )}
           </div>
           <div className="likes">

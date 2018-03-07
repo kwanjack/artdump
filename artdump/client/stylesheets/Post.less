@@ -4,6 +4,7 @@
 
 .test-post-wrapper {
   display: grid;
+  min-width: 700px;
   //grid-auto-columns: 500px;
   //grid-template-rows: 30% 40% 10% 10% 10%;
   grid-template-areas:
@@ -13,18 +14,27 @@
   "e e e e"
 }
 
+img {
+  max-width: 100%;
+}
+
 .post-picture {
   background-color: red;
   grid-area: a;
   display: flex;
   align-items: center;
   justify-content: center;
-  //max-width: 100%;
+  max-width: 100%;
 }
 
 .author {
   background-color: blue;
   grid-area: b;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
 }
 
 .likes {

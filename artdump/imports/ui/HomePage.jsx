@@ -35,9 +35,9 @@ class HomePage extends React.Component {
       <div className="box header">
         <Navbar/>
       </div>
-      <div className="box sidebar">Sidebar</div>
-      <div className="box sidebar2">Sidebar 2</div>
-      <div className="box content">Content
+      <div className="box sidebar"></div>
+      <div className="box sidebar2"></div>
+      <div className="box content">
         { this.renderPosts() }
       </div>
       <div className="box footer">Footer</div>
