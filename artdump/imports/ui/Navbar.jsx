@@ -7,6 +7,7 @@ import AccountsUIWrapper from './AccountsUIWrapper.js';
 
 
 class Navbar extends Component{
+
   render (){
     return <div className="nav-bar-wrapper">
       <div className="navbar-title-container">
@@ -22,10 +23,10 @@ class Navbar extends Component{
         )}
       </div>
       <div className="signup-button-container">
-        <AccountsUIWrapper/>
+        <Link to='/signup'>Signup</Link>
       </div>
       <div className="login-button-container">
-        <button>Login</button>
+        <Link to='/login'>Login</Link>
       </div>
     </div>
   }
