@@ -2,10 +2,8 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Link } from 'react-router-dom';
-import { Posts } from '../api/post.jsx';
 import { Redirect, Switch } from 'react-router-dom'
 import { withTracker } from 'meteor/react-meteor-data';
-import HomePage from './HomePage';
 import Navbar from './Navbar.jsx'
 
 class SignUpPage extends React.Component {
@@ -52,7 +50,7 @@ class SignUpPage extends React.Component {
           </div>
 
           { this.state.error ? <div> this.state.error </div> : null }
-          
+
         </form>
 
     </div>
