@@ -1,3 +1,46 @@
-.post-comment{
+.post-comment {
   margin-bottom: 100px;
+}
+
+.test-post-wrapper {
+  display: grid;
+  //grid-auto-columns: 500px;
+  //grid-template-rows: 30% 40% 10% 10% 10%;
+  grid-template-areas:
+  "a a a a"
+  "b b b c"
+  "d d d d"
+  "e e e e"
+}
+
+.post-picture {
+  background-color: red;
+  grid-area: a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //max-width: 100%;
+}
+
+.author {
+  background-color: blue;
+  grid-area: b;
+}
+
+.likes {
+  background-color: green;
+  grid-area: c;
+}
+
+.comments {
+  background-color: yellow;
+  grid-area: d;
+}
+
+.submit-comment {
+  background-color: pink;
+  grid-area: e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

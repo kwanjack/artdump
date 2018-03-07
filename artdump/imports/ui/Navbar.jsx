@@ -3,12 +3,14 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import Search from './Search.jsx'
 import { Link } from 'react-router-dom';
+import AccountsUIWrapper from './AccountsUIWrapper.js';
+
 
 class Navbar extends Component{
   render (){
     return <div className="nav-bar-wrapper">
       <div className="navbar-title-container">
-      ArtDump
+        <Link className="title-logo" to="/">Artdump</Link>
       </div>
       <div className="search-bar-container">
         <Search/>
@@ -20,7 +22,7 @@ class Navbar extends Component{
         )}
       </div>
       <div className="signup-button-container">
-        <button>Signup</button>
+        <AccountsUIWrapper/>
       </div>
       <div className="login-button-container">
         <button>Login</button>
