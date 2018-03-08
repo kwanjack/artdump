@@ -8,10 +8,12 @@
   //grid-auto-columns: 500px;
   //grid-template-rows: 30% 40% 10% 10% 10%;
   grid-template-areas:
-  "a a a a"
-  "b b b c"
-  "d d d d"
-  "e e e e"
+  "a a a a a a a a"
+  "b b b b b b b c"
+  "d d d d d d d d"
+  "e e e e e e e e";
+  margin-top: 20px;
+  border: 1px solid rgba(255, 0, 0, 0.2);
 }
 
 img {
@@ -19,41 +21,64 @@ img {
 }
 
 .post-picture {
-  background-color: red;
+  //background-color: red;
   grid-area: a;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 100%;
+  border-bottom: 1px solid;
 }
 
 .author {
-  background-color: blue;
+  //background-color: blue;
   grid-area: b;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .likes {
-  background-color: green;
+  //background-color: green;
   grid-area: c;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
+  padding-right: 20px;
 }
 
 .comments {
-  background-color: yellow;
+  //background-color: yellow;
+  //padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
   grid-area: d;
 }
 
 .submit-comment {
-  background-color: pink;
+  //background-color: pink;
   grid-area: e;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 20px;
+}
+
+.comment-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-comment-button {
+  margin-left: 18px;
+}
+
+.comment-textbox {
+  resize: none;
 }

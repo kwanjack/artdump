@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import Search from './Search.jsx'
-import { Link, Redirect, Switch } from 'react-router-dom';
+import { Link, Redirect, Switch, withRouter } from 'react-router-dom';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 
 
@@ -12,21 +12,34 @@ class Navbar extends Component{
     this.state = {redirectToHome: false}
   }
 
+  routeLogin(){
+    this.props.history.push('/login');
+  }
+
+  routeSignup(){
+    this.props.history.push('/signup');
+  }
+
+  routeCreatePost(){
+    this.props.history.push('/createpost');
+  }
+
   renderSignupAndPost(){
+    //don't render signup if user is on signup page
     if(this.props.currentUser._id == null && this.props.path != "/signup"){
       return <div>
-          <Link to='/signup'>Signup</Link>
+          <button onClick={this.routeSignup.bind(this)}>Signup</button>
         </div>
+    //don't render createpost if user is on createpost
     } else if (this.props.currentUser._id != null && this.props.path != "/createpost"){
       return <div>
-          <Link to="/createpost">Post</Link>
+          <button onClick={this.routeCreatePost.bind(this)}>Post</button>
         </div>
     }
   }
 
   logOut(event){
     event.preventDefault();
-    //console.log("pressed logout")
     Meteor.logout(function(err){ 
       console.log(err);
     });
@@ -36,10 +49,10 @@ class Navbar extends Component{
   }
 
   renderLoginLogout(){
-    //console.log(this.props.currentUser);
+    //don't render login button if user on login page
     if(this.props.currentUser._id == null && this.props.path != "/login"){
       return <div>
-          <Link to='/login'>Login</Link>
+          <button onClick={this.routeLogin.bind(this)}>Login</button>
         </div>
     } else if (this.props.currentUser._id != null){
       return <div>
@@ -56,7 +69,7 @@ class Navbar extends Component{
         </Switch>
       )
     }
-    console.log(this.props.currentUser);
+    //console.log(this.props.currentUser);
     return <div className="nav-bar-wrapper">
       <div className="navbar-title-container">
         <Link className="title-logo" to="/">ARTDUMP</Link>
@@ -78,9 +91,9 @@ class Navbar extends Component{
   }
 }
 
-export default withTracker(props => {
+export default withRouter( withTracker(props => {
   let currentUser = Meteor.user() ? Meteor.user() : {};
   return {
     currentUser
   };
-})(Navbar);
+})(Navbar));
