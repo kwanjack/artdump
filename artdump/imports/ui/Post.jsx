@@ -64,7 +64,7 @@ class Post extends Component {
     let userId = this.props.currentUser._id
     if(!currentUserLiked){
       return <div className="likeButton">
-        {<button onClick={this.likePost.bind(this)}>Like</button>}
+        <button onClick={this.likePost.bind(this)}>Like</button>
       </div>
     } else if(currentUserLiked){
       return <div className="unlikeButton">
