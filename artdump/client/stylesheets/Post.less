@@ -1,3 +1,5 @@
+@import "main";
+
 .post-comment {
   margin-bottom: 100px;
 }
@@ -10,10 +12,11 @@
   grid-template-areas:
   "a a a a a a a a"
   "b b b b b b b c"
+  "f f f f f f f f"
   "d d d d d d d d"
   "e e e e e e e e";
   margin-top: 20px;
-  border: 1px solid rgba(255, 0, 0, 0.2);
+  border: 3px solid rgb(238, 250, 250);
 }
 
 img {
@@ -27,7 +30,7 @@ img {
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  border-bottom: 1px solid;
+  border-bottom: 2px solid rgb(238, 250, 250);
 }
 
 .author {
@@ -39,7 +42,7 @@ img {
   align-items: center;
   padding-left: 20px;
   padding-top: 20px;
-  padding-bottom: 20px;
+  //padding-bottom: 20px;
 }
 
 .likes {
@@ -69,6 +72,19 @@ img {
   padding-bottom: 20px;
 }
 
+.post-description {
+  //background-color: orange;
+  grid-area: f;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgb(238, 250, 250);
+}
+
 .comment-form {
   display: flex;
   align-items: center;
@@ -81,4 +97,8 @@ img {
 
 .comment-textbox {
   resize: none;
+}
+
+.author-name {
+  text-decoration: none;
 }

@@ -5,9 +5,6 @@ import AccountsUIWrapper from './AccountsUIWrapper.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Posts } from '../api/post';
 
-import { Button } from 'react-toolbox/lib/button';
-
-
 import Post from './Post.jsx'
 import Search from './Search.jsx'
 import Navbar from './Navbar.jsx'
@@ -33,14 +30,14 @@ class HomePage extends React.Component {
   render() {
     return <div className="wrapper">
       <div className="box header">
-        <Navbar/>
+        <Navbar path={this.props.match.path}/>
       </div>
       <div className="box sidebar"></div>
       <div className="box sidebar2"></div>
       <div className="box content">
         { this.renderPosts() }
       </div>
-      <div className="box footer">Footer</div>
+      <div className="box footer"></div>
     </div>;
   }
 }

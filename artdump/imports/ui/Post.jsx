@@ -93,26 +93,44 @@ class Post extends Component {
     //console.log(this.props.postComments);
     let author = this.props.post.authorUsername;
     let authorId = this.props.post.authorId;
+
+    //grab tags and turn into hash tags
+    let tags = this.props.post.tags.slice(0);
+    let hashtags = [];
+    tags.forEach(function(element) {
+      element = "#".concat(element);
+      hashtags.push(element);
+    });
+    //console.log(hashtags);
     return <div >
         <div className="test-post-wrapper">
           <div className="post-picture">
             <img src={this.props.post.url} />
           </div>
           <div className="author">
-            <Link to={`/user/${authorId}`} >
-              <strong>{author}</strong>:{" "}
-            </Link>
             {(this.props.currentUser._id == this.props.post.authorId &&
-              <div className="delete-post-button">
-                <button onClick={this.handleDeletePost.bind(this)}>&times;</button>
+              <div className="delete-post-button-container">
+                <button 
+                  className="small-button delete-post-button" 
+                  onClick={this.handleDeletePost.bind(this)}>
+                  &times;
+                </button>
               </div>
             )}
+            <Link className="author-name" to={`/user/${authorId}`} >
+              <strong>{author}: </strong>
+            </Link>
           </div>
           <div className="likes">
             {(this.props.currentUser._id != null &&
               this.renderLike()
             )}
             {/*{this.props.post.likes.length} likes*/}
+          </div>
+          <div className="post-description">
+            {this.props.post.description}
+            &nbsp;
+            {hashtags.join(" ")}
           </div>
           {(this.props.postComments.length != 0 &&
             this.renderCommentsBox()

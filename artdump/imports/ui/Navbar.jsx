@@ -72,7 +72,9 @@ class Navbar extends Component{
     //console.log(this.props.currentUser);
     return <div className="nav-bar-wrapper">
       <div className="navbar-title-container">
-        <Link className="title-logo" to="/">ARTDUMP</Link>
+        <Link className="title-logo" to="/">
+          ARTDUMP
+        </Link>
       </div>
       <div className="search-bar-container">
         <Search/>
@@ -81,11 +83,11 @@ class Navbar extends Component{
         {/*Make sure not to render createpost on creatpost page*/}
         {this.renderSignupAndPost()}
       </div>
-      <div className="login-button-container">
-        {this.renderLoginLogout()}
-      </div>
       <div className="setting-button-container">
         <button>Setting</button>
+      </div>
+      <div className="login-button-container">
+        {this.renderLoginLogout()}
       </div>
     </div>
   }
