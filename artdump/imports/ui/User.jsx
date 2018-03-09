@@ -33,17 +33,18 @@ class User extends React.Component{
     let { userIdName } = this.props
     //used toString because React can't render an object before
     //userIdName is fetched
-    return <div>
-        <div>
-          <Navbar/>
-        </div>
-        <div className="user-page-username">
-          {userIdName.toString()}'s Posts
-        </div>
-        <div>
-          { this.renderPosts() }
-        </div>
+    return <div className="wrapper">
+      <div className="box header">
+        <Navbar path={this.props.match.path}/>
       </div>
+      <div className="box sidebar"></div>
+      <div className="box sidebar2"></div>
+      <div className="box content">
+        {userIdName.toString()}'s Posts
+        { this.renderPosts() }
+      </div>
+      <div className="box footer">Footer</div>
+    </div>;
   }
 }
 

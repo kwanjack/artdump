@@ -37,8 +37,9 @@ class CreatePost extends React.Component {
 	}
 
   render() {
-    //redirect to home page
-    if (this.state.redirectToHome) {
+    //redirect to home page once post
+    //also redirect if there is no user logged in
+    if (this.state.redirectToHome || this.props.currentUser._id == null) {
       return (
         <Switch>
           <Redirect to="/"/>

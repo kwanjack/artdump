@@ -11,27 +11,37 @@ class Post extends Component {
     event.preventDefault();
     let ref = 'commentContent'+post_index;
     let text = this.refs[ref].value
-    let postId = this.props.post._id
-    Meteor.call('comment.insert', text, postId)
+    //make sure users can't post empty comments
+    if(text != ""){
+      let postId = this.props.post._id
+      Meteor.call('comment.insert', text, postId)
+    }
     this.refs[ref].value = "";
   }
   //Render the text box and button to post comments
   //Need post_index to know which post comment box is on
   renderSubmitComment(post_index){
-    return <div>
-      <div className="comment-textbox">
-        <form onSubmit={this.submitComment.bind(this, post_index)}>
-          <textarea 
-            rows="3" 
-            cols="50" 
+    return <div className="submit-comment">
+        <form className="comment-form"
+          onSubmit={this.submitComment.bind(this, post_index)}>
+          <textarea
+            className="comment-textbox"
+            rows="1" 
+            cols="70" 
             ref={"commentContent"+post_index}/>
-          <div>
-            <button type="submit">Submit</button>
-          </div>
+          <span>
+            <button className="post-comment-button" type="submit">Submit</button>
+          </span>
         </form>
-      </div>
     </div>
   }
+  //Render comment box
+  renderCommentsBox(){
+    return <div className="comments">
+        {this.renderComments()}
+      </div>
+  }
+
   //Render the list of comments of a post
   renderComments(){
     let { postComments } = this.props;
@@ -64,7 +74,7 @@ class Post extends Component {
     let userId = this.props.currentUser._id
     if(!currentUserLiked){
       return <div className="likeButton">
-        {<button onClick={this.likePost.bind(this)}>Like</button>}
+        <button onClick={this.likePost.bind(this)}>Like</button>
       </div>
     } else if(currentUserLiked){
       return <div className="unlikeButton">
@@ -83,36 +93,51 @@ class Post extends Component {
     //console.log(this.props.postComments);
     let author = this.props.post.authorUsername;
     let authorId = this.props.post.authorId;
+
+    //grab tags and turn into hash tags
+    let tags = this.props.post.tags.slice(0);
+    let hashtags = [];
+    tags.forEach(function(element) {
+      element = "#".concat(element);
+      hashtags.push(element);
+    });
+    //console.log(hashtags);
     return <div >
         <div className="test-post-wrapper">
           <div className="post-picture">
             <img src={this.props.post.url} />
           </div>
           <div className="author">
-            <Link to={`/user/${authorId}`} >
-              <strong>{author}</strong>:{" "}
-            </Link>
             {(this.props.currentUser._id == this.props.post.authorId &&
-            <span className="delete-post-button">
-              <button onClick={this.handleDeletePost.bind(this)}>&times;</button>
-            </span>
+              <div className="delete-post-button-container">
+                <button 
+                  className="small-button delete-post-button" 
+                  onClick={this.handleDeletePost.bind(this)}>
+                  &times;
+                </button>
+              </div>
             )}
+            <Link className="author-name" to={`/user/${authorId}`} >
+              <strong>{author}: </strong>
+            </Link>
           </div>
           <div className="likes">
             {(this.props.currentUser._id != null &&
               this.renderLike()
             )}
-            {this.props.post.likes.length} likes
+            {/*{this.props.post.likes.length} likes*/}
           </div>
-          <div className="comments">
-            Comments:
-            {this.renderComments()}
+          <div className="post-description">
+            {this.props.post.description}
+            &nbsp;
+            {hashtags.join(" ")}
           </div>
-          <div className="submit-comment">
-            {(this.props.currentUser._id != null &&
-              this.renderSubmitComment(this.props.post._id)
-            )}
-          </div>
+          {(this.props.postComments.length != 0 &&
+            this.renderCommentsBox()
+          )}
+          {(this.props.currentUser._id != null &&
+            this.renderSubmitComment(this.props.post._id)
+          )}
         </div>
     </div>
   }

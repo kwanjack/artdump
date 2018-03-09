@@ -5,6 +5,11 @@ html *
    font-family: Arial !important;
 }
 
+.small-button {
+  width: 20px;
+  height: 20px;
+}
+
 body {
   margin: 0px;
 }
@@ -59,7 +64,7 @@ body {
     @media only screen and (min-width: 600px)   {
         .wrapper {
             grid-gap: 0px;
-            grid-template-columns: 120px auto 120px;
+            grid-template-columns: auto 700px auto;
             grid-template-areas:
             "header  header  header"
             "sidebar content sidebar2"
@@ -82,18 +87,22 @@ body {
 }
 
 .footer {
-  background-color: #999;
+  //background-color: #ccc;
+  min-height: 20px;
 }
 
+.content {
+  //background-color: #ccc;
+}
 
 .sidebar {
-  background-color: #ccc;
-  color: #444;
+  //background-color: #ccc;
+  //color: #444;
 }
 
 .sidebar2 {
-  background-color: #ccc;
-  color: #444;
+  //background-color: #ccc;
+  //color: #444;
 }
 
 
