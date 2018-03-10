@@ -8,7 +8,10 @@ import Navbar from './Navbar.jsx'
 class LoginPage extends React.Component {
   constructor() {
     super();
-    this.state = {redirectToHome: false}
+    this.state = {
+      redirectToHome: false,
+      nightmode: nightmode_switch
+    };
   }
 
 	logIn(event){
@@ -26,9 +29,9 @@ class LoginPage extends React.Component {
 	}
 
   render() {
-    return <div className="wrapper">
+    return <div className="wrapper-login">
       <div className="box header">
-        <Navbar path={this.props.match.path}/>
+        <Navbar path={this.props.match.path} nightmode={this.state.nightmode}/>
       </div>
       <div className="box sidebar"></div>
       <div className="box sidebar2"></div>
@@ -47,7 +50,7 @@ class LoginPage extends React.Component {
             <input className="form-field" onChange= {(e) => this.setState({ password: e.target.value }) } type="password" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
-            <label>Email</label>
+            <label>Password</label>
           </div>
 
           <div className="submit-button">

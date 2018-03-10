@@ -9,7 +9,10 @@ import Navbar from './Navbar.jsx'
 class SignUpPage extends React.Component {
   constructor() {
     super();
-    this.state = {redirectToHome: false}
+    this.state = {
+      redirectToHome: false,
+      nightmode: nightmode_switch
+    };
   }
 
 	createAccount(event) {
@@ -30,8 +33,7 @@ class SignUpPage extends React.Component {
   render() {    
     return <div>
         <div>
-          <Navbar
-            path={this.props.match.path}/>
+          <Navbar path={this.props.match.path} nightmode={this.state.nightmode}/>
         </div>
         <h1> Sign Up </h1>
         <form onSubmit={this.createAccount.bind(this)}>

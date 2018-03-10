@@ -27,20 +27,20 @@ class Navbar extends Component{
     //don't render signup if user is on signup page
     if(this.props.currentUser._id == null && this.props.path != "/signup"){
       return <div>
-          <button 
-            className="medium-button"
-            onClick={this.routeSignup.bind(this)}>
-            Signup
-          </button>
+          <Link className="link-button login-button" to="/signup">
+            <i className="fa fa-plus"></i>
+            &nbsp;
+            SIGNUP
+          </Link>
         </div>
     //don't render createpost if user is on createpost
     } else if (this.props.currentUser._id != null && this.props.path != "/createpost"){
       return <div>
-          <button 
-            className="medium-button"
-            onClick={this.routeCreatePost.bind(this)}>
-            Post
-          </button>
+          <h1 className="nav-button post-button" onClick={this.routeCreatePost.bind(this)}>
+            <i className="fa fa-upload"></i>
+            &nbsp;
+            POST
+          </h1>
         </div>
     }
   }
@@ -59,19 +59,19 @@ class Navbar extends Component{
     //don't render login button if user on login page
     if(this.props.currentUser._id == null && this.props.path != "/login"){
       return <div>
-          <button 
-            className="medium-button"
-            onClick={this.routeLogin.bind(this)}>
-            Login
-          </button>
+          <Link className="link-button login-button" to="/login">
+            <i className="fa fa-sign-in"></i>
+            &nbsp;
+            LOGIN
+          </Link>
         </div>
     } else if (this.props.currentUser._id != null){
       return <div>
-          <button 
-            className="medium-button"
-            onClick={this.logOut.bind(this)}>
-            Logout
-          </button>
+          <h1 className="nav-button logout-button" onClick={this.logOut.bind(this)}>
+            <i className="fa fa-sign-out"></i>
+            &nbsp;
+            LOGOUT
+          </h1>
         </div>
     }
   }
@@ -85,7 +85,7 @@ class Navbar extends Component{
       )
     }
     //console.log(this.props.currentUser);
-    return <div className="nav-bar-wrapper">
+    return <div className={"nav-bar-wrapper " + (this.props.nightmode ? 'nightmode-navbar' : '')}>
       <div className="navbar-title-container">
         <Link className="title-logo" to="/">
           <i className="fa fa-trash"></i>
@@ -101,13 +101,13 @@ class Navbar extends Component{
         {this.renderSignupAndPost()}
       </div>
       <div className="setting-button-container">
-        <button className="medium-button">
-          <i className="fa fa-trash"></i>
+        <Link className="nav-button setting-button" to="/settings">
+          <i className="fa fa-cog"></i>
           &nbsp;
-          Setting
-        </button>
+          SETTING
+        </Link>
       </div>
-      <div className="login-button-container">
+      <div className="login-logout-button-container">
         {this.renderLoginLogout()}
       </div>
     </div>
