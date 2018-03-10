@@ -60,8 +60,6 @@ class LoginPage extends React.Component {
       </div>
       <div className="box footer"></div>
     </div>;
-
-
   }
 }
 

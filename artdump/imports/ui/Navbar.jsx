@@ -5,7 +5,6 @@ import Search from './Search.jsx'
 import { Link, Redirect, Switch, withRouter } from 'react-router-dom';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 
-
 class Navbar extends Component{
   constructor() {
     super();
@@ -28,12 +27,20 @@ class Navbar extends Component{
     //don't render signup if user is on signup page
     if(this.props.currentUser._id == null && this.props.path != "/signup"){
       return <div>
-          <button onClick={this.routeSignup.bind(this)}>Signup</button>
+          <button 
+            className="medium-button"
+            onClick={this.routeSignup.bind(this)}>
+            Signup
+          </button>
         </div>
     //don't render createpost if user is on createpost
     } else if (this.props.currentUser._id != null && this.props.path != "/createpost"){
       return <div>
-          <button onClick={this.routeCreatePost.bind(this)}>Post</button>
+          <button 
+            className="medium-button"
+            onClick={this.routeCreatePost.bind(this)}>
+            Post
+          </button>
         </div>
     }
   }
@@ -52,11 +59,19 @@ class Navbar extends Component{
     //don't render login button if user on login page
     if(this.props.currentUser._id == null && this.props.path != "/login"){
       return <div>
-          <button onClick={this.routeLogin.bind(this)}>Login</button>
+          <button 
+            className="medium-button"
+            onClick={this.routeLogin.bind(this)}>
+            Login
+          </button>
         </div>
     } else if (this.props.currentUser._id != null){
       return <div>
-          <button onClick={this.logOut.bind(this)}>Logout</button>
+          <button 
+            className="medium-button"
+            onClick={this.logOut.bind(this)}>
+            Logout
+          </button>
         </div>
     }
   }
@@ -73,6 +88,8 @@ class Navbar extends Component{
     return <div className="nav-bar-wrapper">
       <div className="navbar-title-container">
         <Link className="title-logo" to="/">
+          <i className="fa fa-trash"></i>
+          &nbsp;
           ARTDUMP
         </Link>
       </div>
@@ -84,7 +101,11 @@ class Navbar extends Component{
         {this.renderSignupAndPost()}
       </div>
       <div className="setting-button-container">
-        <button>Setting</button>
+        <button className="medium-button">
+          <i className="fa fa-trash"></i>
+          &nbsp;
+          Setting
+        </button>
       </div>
       <div className="login-button-container">
         {this.renderLoginLogout()}

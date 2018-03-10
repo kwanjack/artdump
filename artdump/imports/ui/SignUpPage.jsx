@@ -46,7 +46,7 @@ class SignUpPage extends React.Component {
           </div>
 
           <div>
-            <button type="submit">Submit</button>
+            <button className="medium-button" type="submit">Submit</button>
           </div>
 
           { this.state.error ? <div> this.state.error </div> : null }
