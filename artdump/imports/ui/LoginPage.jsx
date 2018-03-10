@@ -47,7 +47,7 @@ class LoginPage extends React.Component {
             <input className="form-field" onChange= {(e) => this.setState({ password: e.target.value }) } type="password" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
-            <label>Email</label>
+            <label>Password</label>
           </div>
 
           <div className="submit-button">
