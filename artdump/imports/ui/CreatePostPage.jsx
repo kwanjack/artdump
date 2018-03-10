@@ -10,26 +10,31 @@ import Navbar from './Navbar.jsx'
 class CreatePost extends React.Component {
   constructor() {
     super();
-    this.state = {redirectToHome: false}
+    this.state = {
+      redirectToHome: false,
+      nightmode: nightmode_switch
+    };
   }
 
 	submitPost(event){
     event.preventDefault();
-    var url = this.url.value.trim();
-    var tags = this.tags.value.trim().split(" ");
-    var author = this.props.currentUser._id;
+    let { title, description, url, tagstring } = this.state;
+    //var url = this.url.value.trim();
+    let tags = tagstring.split(" ");
+    let author = this.props.currentUser._id;
     //added username field to make it easier to display author name
     var authorUsername = this.props.currentUser.username;
 
-    this.url.value="";
-    this.tags.value="";
+    //this.url.value="";
+    //this.tags.value="";
 
     Posts.insert({
+      title: title,
       url: url,
+      description: description,
       tags: tags,
       createAt: new Date(),
       likes: [],
-      comments: [],
       authorId: author,
       authorUsername: authorUsername
     });
@@ -47,34 +52,53 @@ class CreatePost extends React.Component {
       )
     }
     //Pass in the path to not render the createpost in navbar
-    return <div>
-        <div>
-          <Navbar
-            path={this.props.match.path}/>
-        </div>
-        <h1> This is the Create Post Page. </h1>
-        <form onSubmit={this.submitPost.bind(this)}>
-          <div>
-            URL
-            </div>
-          <textarea 
-            rows="1" 
-            cols="50" 
-            ref={(input) => {this.url = input}}
-            placeholder="url goes here"/><br/>
-          <div>
-            Tags
-            </div>
-          <textarea 
-            rows="4" 
-            cols="50" 
-            ref={(input) => {this.tags = input}}
-            placeholder="tags goes here"/>
-          <div>
-            <button type="submit">Submit</button>
+    return <div className="wrapper">
+      <div className="box header">
+        <Navbar path={this.props.match.path} nightmode={this.state.nightmode}/>
+      </div>
+      <div className="box sidebar"></div>
+      <div className="box sidebar2"></div>
+      <div className="box content">
+        <h1 className="title"> Upload </h1>
+        <form className="form-wrapper" onSubmit={this.submitPost.bind(this)}>
+
+          <div className="group">      
+            <input className="form-field" onChange={ (e) => this.setState({ title: e.target.value }) } type="text" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>Title</label>
           </div>
+            
+          <div className="group">      
+            <input className="form-field" onChange= {(e) => this.setState({ url: e.target.value }) } type="text" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>URL</label>
+          </div>
+
+          <div className="group">      
+            <input className="form-field" onChange= {(e) => this.setState({ description: e.target.value }) } type="text" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>Description</label>
+          </div>
+
+          <div className="group">      
+            <input className="form-field" onChange= {(e) => this.setState({ tagstring: e.target.value }) } type="text" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>Tags</label>
+          </div>
+
+          <div className="submit-button">
+            <button className="btn grey" type="submit"><span>Post</span></button>
+          </div>
+
+          { this.state.error ? <div> {this.state.error} </div> : null }
         </form>
 
+      </div>
+      <div className="box footer"></div>
     </div>
   }
 }

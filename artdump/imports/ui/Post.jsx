@@ -6,6 +6,10 @@ import Comment from './Comment.jsx';
 import { Comments } from '../api/comment.jsx';
 
 class Post extends Component {
+  constructor() {
+    super();
+    this.state = {nightmode: nightmode_switch}
+  }
   //Call Meteor method to insert comment in comments collection
   submitComment(post_index, event){
     event.preventDefault();
@@ -21,23 +25,26 @@ class Post extends Component {
   //Render the text box and button to post comments
   //Need post_index to know which post comment box is on
   renderSubmitComment(post_index){
-    return <div className="submit-comment">
+    return <div className={"submit-comment" + (this.state.nightmode ? " nightmode-post" : '')}>
         <form className="comment-form"
           onSubmit={this.submitComment.bind(this, post_index)}>
-          <textarea
-            className="comment-inputbox"
-            rows="1" 
-            cols="70" 
-            ref={"commentContent"+post_index}/>
-          <span>
-            <button className="medium-button post-comment-button" type="submit">Submit</button>
-          </span>
+          <div className="comment-inputbox">
+            <textarea className="comment-inputbox-textarea"
+              rows="1" 
+              cols="65" 
+              ref={"commentContent"+post_index}/>
+          </div>
+          <div className="post-comment-button">
+            <button className="btn grey" type="submit">
+              <div>Submit</div>
+            </button>
+          </div>
         </form>
     </div>
   }
   //Render comment box
   renderCommentsBox(){
-    return <div className="comments-box">
+    return <div className={"comments-box-container" + (this.state.nightmode ? " nightmode-post" : '')}>
         {this.renderComments()}
       </div>
   }
@@ -74,15 +81,15 @@ class Post extends Component {
     let userId = this.props.currentUser._id
     if(!currentUserLiked){
       return <div className="likeButton">
-        <button onClick={this.likePost.bind(this)}>
-          Like
-        </button>
+        <div className="star" onClick={this.likePost.bind(this)}>
+          <i className="fa fa-star-o"></i>
+        </div>
       </div>
     } else if(currentUserLiked){
       return <div className="unlikeButton">
-        <button onClick={this.unlikePost.bind(this)}>
-          Unlike
-        </button>
+        <div className="star" onClick={this.unlikePost.bind(this)}>
+          <i className="fa fa-star"></i>
+        </div>
       </div>
     }
   }
@@ -111,7 +118,7 @@ class Post extends Component {
           <div className="post-picture-wrapper">
             <img src={this.props.post.url} />
           </div>
-          <div className="author">
+          <div className={"author-container" + (this.state.nightmode ? " nightmode-post" : '')}>
             {(this.props.currentUser._id == this.props.post.authorId &&
               <div className="delete-post-button-container">
                 <button 
@@ -124,14 +131,16 @@ class Post extends Component {
             <Link className="author-name" to={`/user/${authorId}`} >
               <strong>{author}: </strong>
             </Link>
+            &nbsp;
+            <span>{this.props.post.title}</span>
           </div>
-          <div className="likes">
+          <div className={"likes-container" + (this.state.nightmode ? " nightmode-post" : '')}>
             {(this.props.currentUser._id != null &&
               this.renderLike()
             )}
             {/*{this.props.post.likes.length} likes*/}
           </div>
-          <div className="post-description-container">
+          <div className={"post-description-container" + (this.state.nightmode ? " nightmode-post" : '')}>
             <p className="post-description">
               {this.props.post.description}
               &nbsp;

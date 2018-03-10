@@ -11,7 +11,9 @@ import Navbar from './Navbar.jsx'
 class User extends React.Component{
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      nightmode: nightmode_switch
+    };
   }
   //Scroll page to top
   componentDidMount(){
@@ -35,15 +37,15 @@ class User extends React.Component{
     //userIdName is fetched
     return <div className="wrapper">
       <div className="box header">
-        <Navbar path={this.props.match.path}/>
+        <Navbar path={this.props.match.path} nightmode={this.state.nightmode}/>
       </div>
-      <div className="box sidebar"></div>
-      <div className="box sidebar2"></div>
-      <div className="box content">
+      <div className={"box sidebar" + (this.state.nightmode ? " nightmode-page" : '')}></div>
+      <div className={"box sidebar2" + (this.state.nightmode ? " nightmode-page" : '')}></div>
+      <div className={"box content" + (this.state.nightmode ? " nightmode-page" : '')}>
         {userIdName.toString()}'s Posts
         { this.renderPosts() }
       </div>
-      <div className="box footer">Footer</div>
+      <div className={"box footer" + (this.state.nightmode ? " nightmode-page" : '')}></div>
     </div>;
   }
 }
