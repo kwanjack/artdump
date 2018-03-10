@@ -25,19 +25,19 @@ class Post extends Component {
         <form className="comment-form"
           onSubmit={this.submitComment.bind(this, post_index)}>
           <textarea
-            className="comment-textbox"
+            className="comment-inputbox"
             rows="1" 
             cols="70" 
             ref={"commentContent"+post_index}/>
           <span>
-            <button className="post-comment-button" type="submit">Submit</button>
+            <button className="medium-button post-comment-button" type="submit">Submit</button>
           </span>
         </form>
     </div>
   }
   //Render comment box
   renderCommentsBox(){
-    return <div className="comments">
+    return <div className="comments-box">
         {this.renderComments()}
       </div>
   }
@@ -74,11 +74,15 @@ class Post extends Component {
     let userId = this.props.currentUser._id
     if(!currentUserLiked){
       return <div className="likeButton">
-        <button onClick={this.likePost.bind(this)}>Like</button>
+        <button onClick={this.likePost.bind(this)}>
+          Like
+        </button>
       </div>
     } else if(currentUserLiked){
       return <div className="unlikeButton">
-        <button onClick={this.unlikePost.bind(this)}>Unlike</button>
+        <button onClick={this.unlikePost.bind(this)}>
+          Unlike
+        </button>
       </div>
     }
   }
@@ -103,8 +107,8 @@ class Post extends Component {
     });
     //console.log(hashtags);
     return <div >
-        <div className="test-post-wrapper">
-          <div className="post-picture">
+        <div className="post-wrapper-child">
+          <div className="post-picture-wrapper">
             <img src={this.props.post.url} />
           </div>
           <div className="author">
@@ -127,10 +131,12 @@ class Post extends Component {
             )}
             {/*{this.props.post.likes.length} likes*/}
           </div>
-          <div className="post-description">
-            {this.props.post.description}
-            &nbsp;
-            {hashtags.join(" ")}
+          <div className="post-description-container">
+            <p className="post-description">
+              {this.props.post.description}
+              &nbsp;
+              <a className="post-hashtags">{hashtags.join(" ")}</a>
+            </p>
           </div>
           {(this.props.postComments.length != 0 &&
             this.renderCommentsBox()
