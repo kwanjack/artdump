@@ -26,31 +26,40 @@ class LoginPage extends React.Component {
 	}
 
   render() {
-    return <div>
-      <div>
-        <Navbar
-          path={this.props.match.path}/>
+    return <div className="wrapper">
+      <div className="box header">
+        <Navbar path={this.props.match.path}/>
       </div>
-      <h1> Log In </h1>
-      <form onSubmit={this.logIn.bind(this)}>
-        <div>
-          <label><b>Username</b></label>
-          <input onChange={ (e) => this.setState({ username: e.target.value }) } type="text" placeholder="username" required/>
-        </div>
+      <div className="box sidebar"></div>
+      <div className="box sidebar2"></div>
+      <div className="box content">
+        <h1 className="title"> Log In </h1>
+        <form className="form-wrapper" onSubmit={this.logIn.bind(this)}>
 
-        <div>
-          <label><b>Password</b></label>
-          <input onChange= {(e) => this.setState({ password: e.target.value }) } type="password" placeholder="password" required/>
-        </div>
+          <div className="group">      
+            <input className="form-field" onChange={ (e) => this.setState({ username: e.target.value }) } type="text" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>Name</label>
+          </div>
+            
+          <div className="group">      
+            <input className="form-field" onChange= {(e) => this.setState({ password: e.target.value }) } type="password" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>Email</label>
+          </div>
 
-        <div>
-          <button className="medium-button" type="submit">Submit</button>
-        </div>
+          <div className="submit-button">
+            <button className="btn grey" type="submit"><span>Sign In</span></button>
+          </div>
 
-        { this.state.error ? <div> {this.state.error} </div> : null }
-      </form>
+          { this.state.error ? <div> {this.state.error} </div> : null }
+        </form>
 
-    </div>
+      </div>
+      <div className="box footer"></div>
+    </div>;
   }
 }
 
