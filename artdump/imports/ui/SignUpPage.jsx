@@ -42,21 +42,21 @@ class SignUpPage extends React.Component {
         <form className="form-wrapper" onSubmit={this.createAccount.bind(this)}>
           
           <div className="group">
-            <input className="form-field" onChange={ (e) => this.setState({ username: e.target.value }) } type="text" placeholder="username" required/>
+            <input className="form-field" onChange={ (e) => this.setState({ username: e.target.value }) } type="text" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
             <label><b>Username</b></label>
           </div>
 
           <div className="group">
-            <input className="form-field" onChange= {(e) => this.setState({ password: e.target.value }) } type="password" placeholder="password" required/>
+            <input className="form-field" onChange= {(e) => this.setState({ password: e.target.value }) } type="password" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
             <label><b>Password</b></label>
           </div>
 
           <div className="group">
-            <input className="form-field" onChange= {(e) => this.setState({ cpassword: e.target.value }) } type="password" placeholder="confirm password" required/>
+            <input className="form-field" onChange= {(e) => this.setState({ cpassword: e.target.value }) } type="password" required/>
             {this.state.password == this.state.cpassword ? console.log("yes") : this.state.submit.disabled = true}
             <span className="highlight"></span>
             <span className="bar"></span>
@@ -64,14 +64,14 @@ class SignUpPage extends React.Component {
           </div>
 
           <div className="group">
-            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type="" placeholder="email" required/>
+            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type="" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
             <label><b>Email</b></label>
           </div>
 
           <div className="group">
-            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type="" placeholder="email" required/>
+            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type="" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
             <label><b>Confirm Email</b></label>
