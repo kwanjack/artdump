@@ -17,8 +17,8 @@ class SignUpPage extends React.Component {
 
 	createAccount(event) {
     event.preventDefault();
-    let { username, password } = this.state;
-    let user = { username, password };
+    let { username, password, email } = this.state;
+    let user = { username, password, email };
 
     Accounts.createUser(user, err => {
       if (err) {
@@ -31,20 +31,50 @@ class SignUpPage extends React.Component {
 	}
 
   render() {    
-    return <div>
-        <div>
+    return <div className="wrapper-login">
+        <div className="box header">
           <Navbar path={this.props.match.path} nightmode={this.state.nightmode}/>
         </div>
-        <h1> Sign Up </h1>
-        <form onSubmit={this.createAccount.bind(this)}>
-          <div>
+      <div className="box sidebar"></div>
+      <div className="box sidebar2"></div>
+      <div className="box content">
+        <h1 className="title"> Sign Up </h1>
+        <form className="form-wrapper" onSubmit={this.createAccount.bind(this)}>
+          
+          <div className="group">
+            <input className="form-field" onChange={ (e) => this.setState({ username: e.target.value }) } type="text" placeholder="username" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
             <label><b>Username</b></label>
-            <input onChange={ (e) => this.setState({ username: e.target.value }) } type="text" placeholder="username" required/>
           </div>
 
-          <div>
+          <div className="group">
+            <input className="form-field" onChange= {(e) => this.setState({ password: e.target.value }) } type="password" placeholder="password" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
             <label><b>Password</b></label>
-            <input onChange= {(e) => this.setState({ password: e.target.value }) } type="password" placeholder="password" required/>
+          </div>
+
+          <div className="group">
+            <input className="form-field" onChange= {(e) => this.setState({ cpassword: e.target.value }) } type="password" placeholder="confirm password" required/>
+            {this.state.password == this.state.cpassword ? console.log("yes") : this.state.submit.disabled = true}
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label><b>Confirm Password</b></label>
+          </div>
+
+          <div className="group">
+            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type="" placeholder="email" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label><b>Email</b></label>
+          </div>
+
+          <div className="group">
+            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type="" placeholder="email" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label><b>Confirm Email</b></label>
           </div>
 
           <div>
@@ -54,7 +84,7 @@ class SignUpPage extends React.Component {
           { this.state.error ? <div> this.state.error </div> : null }
 
         </form>
-
+        </div>
     </div>
   }
 }
