@@ -30,6 +30,16 @@ class SignUpPage extends React.Component {
     });
 	}
 
+  validatePassword(e) {
+    let cpassword = e.target.value;
+
+    if (this.state.password == cpassword) {
+      this.setState({ disabled: false, error: null });
+    } else {
+      this.setState({ disabled: true, error: 'Password Mismatch!' });
+    }
+  }
+
   render() {    
     return <div className="wrapper-login">
         <div className="box header">
@@ -56,8 +66,7 @@ class SignUpPage extends React.Component {
           </div>
 
           <div className="group">
-            <input className="form-field" onChange= {(e) => this.setState({ cpassword: e.target.value }) } type="password" required/>
-            {this.state.password == this.state.cpassword ? console.log("yes") : this.state.submit.disabled = true}
+            <input className="form-field" onChange= {(e) => this.validatePassword(e)} type="password" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
             <label><b>Confirm Password</b></label>
@@ -71,17 +80,17 @@ class SignUpPage extends React.Component {
           </div>
 
           <div className="group">
-            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type="" required/>
+            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type=""  required/>
             <span className="highlight"></span>
             <span className="bar"></span>
             <label><b>Confirm Email</b></label>
           </div>
 
           <div>
-            <button className="medium-button" type="submit">Submit</button>
+            <button disabled={this.state.disabled} className="medium-button" type="submit">Submit</button>
           </div>
 
-          { this.state.error ? <div> this.state.error </div> : null }
+          { this.state.error ? <div> {this.state.error} </div> : null }
 
         </form>
         </div>
