@@ -26,3 +26,8 @@ Go to ```localhost:3000``` and examine the web app.
 
 Meteor creates a local copy of MongoDB and store the web app data in there
 so feel free to create accounts to test out the features.
+
+### Examples
+
+![alt text](https://i.imgur.com/k2m3JBa.png)
+![alt text](https://i.imgur.com/q0AZrrL.png)
