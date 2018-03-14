@@ -1,4 +1,4 @@
-# Art DUmp
+# Art Dump
 An art blog, also designed to be used as a portfolio with individual user's profiles. Built with Meteor framework, ReactJS frontend and MongoDB.
 
 ## Run this project
