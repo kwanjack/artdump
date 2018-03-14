@@ -29,7 +29,7 @@ class LoginPage extends React.Component {
 	}
 
   render() {
-    return <div className="wrapper-login">
+    return <div className="wrapper">
       <div className="box header">
         <Navbar path={this.props.match.path} nightmode={this.state.nightmode}/>
       </div>

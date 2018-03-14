@@ -15,12 +15,8 @@ class Comment extends Component{
       <div>
         <strong>{this.props.comment.authorUsername}</strong>: {this.props.comment.text}
         {(this.props.currentUser._id == this.props.comment.authorId &&
-          <span>
-            <button 
-              className="small-button delete-comment-button" 
-              onClick={this.handleDeleteComment.bind(this)}>
-              &times;
-            </button>
+          <span onClick={this.handleDeleteComment.bind(this)}>
+            <i className="fa fa-times-circle"></i>
           </span>
         )}
         </div>

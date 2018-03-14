@@ -8,7 +8,9 @@ import { Comments } from '../api/comment.jsx';
 class Post extends Component {
   constructor() {
     super();
-    this.state = {nightmode: nightmode_switch}
+    this.state = {
+      nightmode: nightmode_switch
+    };
   }
   //Call Meteor method to insert comment in comments collection
   submitComment(post_index, event){
@@ -121,11 +123,9 @@ class Post extends Component {
           <div className={"author-container" + (this.state.nightmode ? " nightmode-post" : '')}>
             {(this.props.currentUser._id == this.props.post.authorId &&
               <div className="delete-post-button-container">
-                <button 
-                  className="small-button delete-post-button" 
-                  onClick={this.handleDeletePost.bind(this)}>
-                  &times;
-                </button>
+                <div onClick={this.handleDeletePost.bind(this)}>
+                  <i className="fa fa-times-circle"></i>
+                </div>
               </div>
             )}
             <Link className="author-name" to={`/user/${authorId}`} >
