@@ -17,8 +17,8 @@ class SignUpPage extends React.Component {
 
 	createAccount(event) {
     event.preventDefault();
-    let { username, password } = this.state;
-    let user = { username, password };
+    let { username, password, email } = this.state;
+    let user = { username, password, email };
 
     Accounts.createUser(user, err => {
       if (err) {
@@ -30,31 +30,69 @@ class SignUpPage extends React.Component {
     });
 	}
 
+  checkValidation(e) {
+    let emvalidated = (this.state.email == this.state.cemail);
+    let pwvalidated = (this.state.password == this.state.cpassword);
+
+    if (emvalidated && pwvalidated) { return this.setState({ disabled: false, error: null}); } 
+    if(!emvalidated) { return this.setState({ disabled: true, error: 'Email Mismatch!' }); }
+    if(!pwvalidated) { return this.setState({ disabled: true, error: 'Password Mismatch!' }); }
+  }
+
   render() {    
-    return <div>
-        <div>
+    return <div className="wrapper-login">
+        <div className="box header">
           <Navbar path={this.props.match.path} nightmode={this.state.nightmode}/>
         </div>
-        <h1> Sign Up </h1>
-        <form onSubmit={this.createAccount.bind(this)}>
-          <div>
+      <div className="box sidebar"></div>
+      <div className="box sidebar2"></div>
+      <div className="box content">
+        <h1 className="title"> Sign Up </h1>
+        <form className="form-wrapper" onSubmit={this.createAccount.bind(this)}>
+          
+          <div className="group">
+            <input className="form-field" onChange={ (e) => this.setState({ username: e.target.value }) } type="text" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
             <label><b>Username</b></label>
-            <input onChange={ (e) => this.setState({ username: e.target.value }) } type="text" placeholder="username" required/>
           </div>
 
-          <div>
+          <div className="group">
+            <input className="form-field" onChange= {(e) => this.setState({ password: e.target.value, disabled: false }) } type="password" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
             <label><b>Password</b></label>
-            <input onChange= {(e) => this.setState({ password: e.target.value }) } type="password" placeholder="password" required/>
+          </div>
+
+          <div className="group">
+            <input className="form-field" onChange= {(e) => this.setState({ cpassword: e.target.value, disabled: false }) } type="password" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label><b>Confirm Password</b></label>
+          </div>
+
+          <div className="group">
+            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value, disabled: false }) } type="text" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label><b>Email</b></label>
+          </div>
+
+          <div className="group">
+            <input className="form-field" onChange= {(e) => this.setState({ cemail: e.target.value, disabled: false }) } type="text" required/>
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label><b>Confirm Email</b></label>
           </div>
 
           <div>
-            <button className="medium-button" type="submit">Submit</button>
+            <button onMouseOver= {(e) => this.checkValidation(e)} disabled={ this.state.disabled } className="medium-button" type="submit">Submit</button>
           </div>
 
-          { this.state.error ? <div> this.state.error </div> : null }
+          { this.state.error ? <div> {this.state.error} </div> : null }
 
         </form>
-
+        </div>
     </div>
   }
 }
