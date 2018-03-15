@@ -32,12 +32,62 @@ class SignUpPage extends React.Component {
 
   validatePassword(e) {
     let cpassword = e.target.value;
-
+    /*
     if (this.state.password == cpassword) {
+      pwvalidated = true;
+    } else {
+      pwvalidated = false;
+    }
+    console.log(emvalidated);
+    console.log(pwvalidated);
+    /*if (this.state.password == cpassword) {
       this.setState({ disabled: false, error: null });
     } else {
       this.setState({ disabled: true, error: 'Password Mismatch!' });
+    }*/
+  }
+
+  validateEmail(e) {
+    let cemail = e.target.value;
+    /*
+    if (this.state.email == cemail) {
+      emvalidated = true;     
+    } else {
+      emvalidated = false;
     }
+    console.log(emvalidated);
+    console.log(pwvalidated);
+
+    /*if (this.state.email == cemail) {
+      this.setState({ disabled: false, error: null});      
+    } else {
+      this.setState({ disabled: true, error: 'Email Mismatch!' });
+    }*/
+  }
+
+  checkValidation(e) {
+    if (this.state.email == this.state.cemail) {
+      emvalidated = true;     
+    } else {
+      emvalidated = false;
+    }
+    if (this.state.password == this.state.cpassword) {
+      pwvalidated = true;
+    } else {
+      pwvalidated = false;
+    }
+    console.log(this.state.password);
+    console.log(this.state.cpassword);
+    if (emvalidated && pwvalidated) {
+      this.setState({ disabled: false, error: null});      
+    } 
+    if(!emvalidated) {
+      this.setState({ disabled: true, error: 'Email Mismatch!' });
+    }
+    if(!pwvalidated) {
+      this.setState({ disabled: true, error: 'Password Mismatch!' });
+    }
+
   }
 
   render() {    
@@ -66,28 +116,28 @@ class SignUpPage extends React.Component {
           </div>
 
           <div className="group">
-            <input className="form-field" onChange= {(e) => this.validatePassword(e)} type="password" required/>
+            <input className="form-field" onChange= {(e) => this.setState({ cpassword: e.target.value }) } type="password" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
             <label><b>Confirm Password</b></label>
           </div>
 
           <div className="group">
-            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type="" required/>
+            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type="email" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
             <label><b>Email</b></label>
           </div>
 
           <div className="group">
-            <input className="form-field" onChange= {(e) => this.setState({ email: e.target.value }) } type=""  required/>
+            <input className="form-field" onChange= {(e) => this.setState({ cemail: e.target.value }) } type="email" required/>
             <span className="highlight"></span>
             <span className="bar"></span>
             <label><b>Confirm Email</b></label>
           </div>
 
           <div>
-            <button disabled={this.state.disabled} className="medium-button" type="submit">Submit</button>
+            <button onMouseOver= {(e) => this.checkValidation(e)} disabled={this.state.disabled} className="medium-button" type="submit">Submit</button>
           </div>
 
           { this.state.error ? <div> {this.state.error} </div> : null }
